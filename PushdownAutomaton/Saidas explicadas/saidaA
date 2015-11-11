@@ -1,0 +1,125 @@
+a)
+
+Arquivo de entrada:
+q1 q2 q3 q4 q5
+a b c
+a
+q1
+q4 q7
+a a b c c 
+q1 e e q2 $
+q2 a e q2 a
+q2 e e q3 e
+q3 b c q3 e
+q3 e $ q4 e
+q4 c e q4 e
+q2 e e q5 e
+q5 b e q5 e
+q5 e e q6 e
+q6 c a q6 e
+q6 e $ q7 e
+
+Saida DFS:
+--Current state: q1     (Tape: a StackTop: e)
+--Transition: [q1 e e] --> [q2 $]
+        |--Current state: q2    (Tape: a StackTop: $)
+        |--Transition: [q2 a e] --> [q2 a]
+        |       |--Current state: q2    (Tape: a StackTop: a)
+        |       |--Transition: [q2 a e] --> [q2 a]
+        |       |       |--Current state: q2    (Tape: b StackTop: a)
+        |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |--Current state: q3    (Tape: b StackTop: a)
+        |       |       |--Transition: [q2 e e] --> [q5 e]
+        |       |       |       |--Current state: q5    (Tape: b StackTop: a)
+        |       |       |       |--Transition: [q5 b e] --> [q5 e]
+        |       |       |       |       |--Current state: q5    (Tape: c StackTop: a)
+        |       |       |       |       |--Transition: [q5 e e] --> [q6 e]
+        |       |       |       |       |       |--Current state: q6    (Tape: c StackTop: a)
+        |       |       |       |       |       |--Transition: [q6 c a] --> [q6 e]
+        |       |       |       |       |       |       |--Current state: q6    (Tape: c StackTop: a)
+        |       |       |       |       |       |       |--Transition: [q6 c a] --> [q6 e]
+        |       |       |       |       |       |       |       |--Current state: q6    (Tape: e StackTop: $)
+        |       |       |       |       |       |       |       |--Transition: [q6 e $] --> [q7 e]
+        |       |       |       |       |       |       |       |       |--Current state: q7    (Tape: e StackTop: e)
+        |       |       |       |       |       |       |       |       |--Aceita!
+        |       |       |       |--Transition: [q5 e e] --> [q6 e]
+        |       |       |       |       |--Current state: q6    (Tape: b StackTop: e)
+        |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |--Current state: q3    (Tape: a StackTop: e)
+        |       |--Transition: [q2 e e] --> [q5 e]
+        |       |       |--Current state: q5    (Tape: a StackTop: e)
+        |       |       |--Transition: [q5 e e] --> [q6 e]
+        |       |       |       |--Current state: q6    (Tape: a StackTop: e)
+        |--Transition: [q2 e e] --> [q3 e]
+        |       |--Current state: q3    (Tape: a StackTop: e)
+        |--Transition: [q2 e e] --> [q5 e]
+        |       |--Current state: q5    (Tape: a StackTop: e)
+        |       |--Transition: [q5 e e] --> [q6 e]
+        |       |       |--Current state: q6    (Tape: a StackTop: e)
+Cadeia Aceita!
+
+
+Saida BFS:
+--Current state: q1     (Tape: a StackTop: e)Size: 0
+--Transition: [q1 e e] --> [q2 $]
+
+        |--Current state: q2    (Tape: a StackTop: $)Size: 1
+        |--Transition: [q2 a e] --> [q2 a]
+        |--Transition: [q2 e e] --> [q3 e]
+        |--Transition: [q2 e e] --> [q5 e]
+        |
+        |       |--Current state: q2    (Tape: a StackTop: a)Size: 2
+        |       |--Transition: [q2 a e] --> [q2 a]
+        |       |--Transition: [q2 e e] --> [q3 e]
+        |       |--Transition: [q2 e e] --> [q5 e]
+        |       |
+        |       |--Current state: q3    (Tape: a StackTop: $)Size: 1
+        |       |--Transition: [q3 e $] --> [q4 e]
+        |       |
+        |       |--Current state: q5    (Tape: a StackTop: $)Size: 1
+        |       |--Transition: [q5 e e] --> [q6 e]
+        |       |
+        |       |       |--Current state: q2    (Tape: b StackTop: a)Size: 3
+        |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |--Transition: [q2 e e] --> [q5 e]
+        |       |       |
+        |       |       |--Current state: q3    (Tape: a StackTop: a)Size: 2
+        |       |       |
+        |       |       |--Current state: q5    (Tape: a StackTop: a)Size: 2
+        |       |       |--Transition: [q5 e e] --> [q6 e]
+        |       |       |
+        |       |       |--Current state: q4    (Tape: a StackTop: e)Size: 0
+        |       |       |
+        |       |       |--Current state: q6    (Tape: a StackTop: $)Size: 1
+        |       |       |--Transition: [q6 e $] --> [q7 e]
+        |       |       |
+        |       |       |       |--Current state: q3    (Tape: b StackTop: a)Size: 3
+        |       |       |       |
+        |       |       |       |--Current state: q5    (Tape: b StackTop: a)Size: 3
+        |       |       |       |--Transition: [q5 b e] --> [q5 e]
+        |       |       |       |--Transition: [q5 e e] --> [q6 e]
+        |       |       |       |
+        |       |       |       |--Current state: q6    (Tape: a StackTop: a)Size: 2
+        |       |       |       |
+        |       |       |       |--Current state: q7    (Tape: a StackTop: e)Size: 0
+        |       |       |       |
+        |       |       |       |       |--Current state: q5    (Tape: c StackTop: a)Size: 3
+        |       |       |       |       |--Transition: [q5 e e] --> [q6 e]
+        |       |       |       |       |
+        |       |       |       |       |--Current state: q6    (Tape: b StackTop: a)Size: 3
+        |       |       |       |       |
+        |       |       |       |       |       |--Current state: q6    (Tape: c StackTop: a)Size: 3
+        |       |       |       |       |       |--Transition: [q6 c a] --> [q6 e]
+        |       |       |       |       |       |
+        |       |       |       |       |       |       |--Current state: q6    (Tape: c StackTop: a)Size: 2
+        |       |       |       |       |       |       |--Transition: [q6 c a] --> [q6 e]
+        |       |       |       |       |       |       |
+        |       |       |       |       |       |       |       |--Current state: q6    (Tape: e StackTop: $)Size: 1
+        |       |       |       |       |       |       |       |--Transition: [q6 e $] --> [q7 e]
+        |       |       |       |       |       |       |       |
+        |       |       |       |       |       |       |       |       |--Current state: q7    (Tape: e StackTop: e)Size: 0
+        |       |       |       |       |       |       |       |       |Aceita!
+Cadeia Aceita!
+
+
+

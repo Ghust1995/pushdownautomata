@@ -1,0 +1,132 @@
+b)
+
+Arquivo de entrada:
+q1 q2 q3 q4
+0 1
+0 1
+q1
+q1 q4
+0 0 1 1 0 0
+q1 e e q2 $
+q2 e e q2 0
+q2 0 e q2 0
+q2 1 e q2 1
+q2 e e q3 e
+q3 0 0 q3 e
+q3 1 1 q3 e
+q3 e $ q4 e
+
+Saida DFS:
+--Current state: q1     (Tape: 0 StackTop: e)Size: 0
+--Transition: [q1 e e] --> [q2 $]
+        |--Current state: q2    (Tape: 0 StackTop: $)Size: 1
+        |--Transition: [q2 0 e] --> [q2 0]
+        |       |--Current state: q2    (Tape: 0 StackTop: 0)Size: 2
+        |       |--Transition: [q2 0 e] --> [q2 0]
+        |       |       |--Current state: q2    (Tape: 1 StackTop: 0)Size: 3
+        |       |       |--Transition: [q2 1 e] --> [q2 1]
+        |       |       |       |--Current state: q2    (Tape: 1 StackTop: 1)Size: 4
+        |       |       |       |--Transition: [q2 1 e] --> [q2 1]
+        |       |       |       |       |--Current state: q2    (Tape: 0 StackTop: 1)Size: 5
+        |       |       |       |       |--Transition: [q2 0 e] --> [q2 0]
+        |       |       |       |       |       |--Current state: q2    (Tape: 0 StackTop: 0)Size: 6
+        |       |       |       |       |       |--Transition: [q2 0 e] --> [q2 0]
+        |       |       |       |       |       |       |--Current state: q2    (Tape: e StackTop: 0)Size: 7
+        |       |       |       |       |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |       |       |       |       |--Current state: q3    (Tape: e StackTop: 0)Size: 7
+        |       |       |       |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |       |       |       |--Current state: q3    (Tape: 0 StackTop: 0)Size: 6
+        |       |       |       |       |       |       |--Transition: [q3 0 0] --> [q3 e]
+        |       |       |       |       |       |       |       |--Current state: q3    (Tape: e StackTop: 1)Size: 5
+        |       |       |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |       |       |--Current state: q3    (Tape: 0 StackTop: 1)Size: 5
+        |       |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |       |--Current state: q3    (Tape: 1 StackTop: 1)Size: 4
+        |       |       |       |       |--Transition: [q3 1 1] --> [q3 e]
+        |       |       |       |       |       |--Current state: q3    (Tape: 0 StackTop: 0)Size: 3
+        |       |       |       |       |       |--Transition: [q3 0 0] --> [q3 e]
+        |       |       |       |       |       |       |--Current state: q3    (Tape: 0 StackTop: 0)Size: 2
+        |       |       |       |       |       |       |--Transition: [q3 0 0] --> [q3 e]
+        |       |       |       |       |       |       |       |--Current state: q3    (Tape: e StackTop: $)Size: 1
+        |       |       |       |       |       |       |       |--Transition: [q3 e $] --> [q4 e]
+        |       |       |       |       |       |       |       |       |--Current state: q4    (Tape: e StackTop: e)Size: 0
+        |       |       |       |       |       |       |       |       |--Aceita!
+        |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |--Current state: q3    (Tape: 1 StackTop: 0)Size: 3
+        |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |--Current state: q3    (Tape: 0 StackTop: 0)Size: 2
+        |       |       |--Transition: [q3 0 0] --> [q3 e]
+        |       |       |       |--Current state: q3    (Tape: 1 StackTop: $)Size: 1
+        |       |       |       |--Transition: [q3 e $] --> [q4 e]
+        |       |       |       |       |--Current state: q4    (Tape: 1 StackTop: e)Size: 0
+        |--Transition: [q2 e e] --> [q3 e]
+        |       |--Current state: q3    (Tape: 0 StackTop: $)Size: 1
+        |       |--Transition: [q3 e $] --> [q4 e]
+        |       |       |--Current state: q4    (Tape: 0 StackTop: e)Size: 0
+Cadeia Aceita!
+
+
+Saida BFS: Usando como fita 0 0 0 1 1 1
+--Current state: q1     (Tape: 0 StackTop: e)Size: 0
+--Transition: [q1 e e] --> [q2 $]
+
+        |--Current state: q2    (Tape: 0 StackTop: $)Size: 1
+        |--Transition: [q2 0 e] --> [q2 0]
+        |--Transition: [q2 e e] --> [q3 e]
+        |
+        |       |--Current state: q2    (Tape: 0 StackTop: 0)Size: 2
+        |       |--Transition: [q2 0 e] --> [q2 0]
+        |       |--Transition: [q2 e e] --> [q3 e]
+        |       |
+        |       |--Current state: q3    (Tape: 0 StackTop: $)Size: 1
+        |       |--Transition: [q3 e $] --> [q4 e]
+        |       |
+        |       |       |--Current state: q2    (Tape: 0 StackTop: 0)Size: 3
+        |       |       |--Transition: [q2 0 e] --> [q2 0]
+        |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |
+        |       |       |--Current state: q3    (Tape: 0 StackTop: 0)Size: 2
+        |       |       |--Transition: [q3 0 0] --> [q3 e]
+        |       |       |
+        |       |       |--Current state: q4    (Tape: 0 StackTop: e)Size: 0
+        |       |       |
+        |       |       |       |--Current state: q2    (Tape: 1 StackTop: 0)Size: 4
+        |       |       |       |--Transition: [q2 1 e] --> [q2 1]
+        |       |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |
+        |       |       |       |--Current state: q3    (Tape: 0 StackTop: 0)Size: 3
+        |       |       |       |--Transition: [q3 0 0] --> [q3 e]
+        |       |       |       |
+        |       |       |       |--Current state: q3    (Tape: 0 StackTop: $)Size: 1
+        |       |       |       |--Transition: [q3 e $] --> [q4 e]
+        |       |       |       |
+        |       |       |       |       |--Current state: q2    (Tape: 1 StackTop: 1)Size: 5
+        |       |       |       |       |--Transition: [q2 1 e] --> [q2 1]
+        |       |       |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |       |
+        |       |       |       |       |--Current state: q3    (Tape: 1 StackTop: 0)Size: 4
+        |       |       |       |       |
+        |       |       |       |       |--Current state: q3    (Tape: 1 StackTop: 0)Size: 2
+        |       |       |       |       |
+        |       |       |       |       |--Current state: q4    (Tape: 0 StackTop: e)Size: 0
+        |       |       |       |       |
+        |       |       |       |       |       |--Current state: q2    (Tape: 1 StackTop: 1)Size: 6
+        |       |       |       |       |       |--Transition: [q2 1 e] --> [q2 1]
+        |       |       |       |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |       |       |
+        |       |       |       |       |       |--Current state: q3    (Tape: 1 StackTop: 1)Size: 5
+        |       |       |       |       |       |--Transition: [q3 1 1] --> [q3 e]
+        |       |       |       |       |       |
+        |       |       |       |       |       |       |--Current state: q2    (Tape: e StackTop: 1)Size: 7
+        |       |       |       |       |       |       |--Transition: [q2 e e] --> [q3 e]
+        |       |       |       |       |       |       |
+        |       |       |       |       |       |       |--Current state: q3    (Tape: 1 StackTop: 1)Size: 6
+        |       |       |       |       |       |       |--Transition: [q3 1 1] --> [q3 e]
+        |       |       |       |       |       |       |
+        |       |       |       |       |       |       |--Current state: q3    (Tape: 1 StackTop: 0)Size: 4
+        |       |       |       |       |       |       |
+        |       |       |       |       |       |       |       |--Current state: q3    (Tape: e StackTop: 1)Size: 7
+        |       |       |       |       |       |       |       |
+        |       |       |       |       |       |       |       |--Current state: q3    (Tape: e StackTop: 1)Size: 5
+        |       |       |       |       |       |       |       |
+Cadeia Recusada!

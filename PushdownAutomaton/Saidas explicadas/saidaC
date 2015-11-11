@@ -1,0 +1,44 @@
+c)
+
+Arquivo de entrada:
+q1 q2 q3 q4
+a b
+0
+q1
+q1 q4
+a b a
+q1 e e q2 $
+q2 b 0 q3 e
+q2 a e q2 0
+q3 e $ q4 e
+q3 b 0 q3 e
+
+Saida DFS:
+--Current state: q1     (Tape: a StackTop: e)
+--Transition: [q1 e e] --> [q2 $]
+        |--Current state: q2    (Tape: a StackTop: $)
+        |--Transition: [q2 a e] --> [q2 0]
+        |       |--Current state: q2    (Tape: b StackTop: 0)
+        |       |--Transition: [q2 b 0] --> [q3 e]
+        |       |       |--Current state: q3    (Tape: a StackTop: $)
+        |       |       |--Transition: [q3 e $] --> [q4 e]
+        |       |       |       |--Current state: q4    (Tape: a StackTop: e)
+Cadeia Recusada!
+
+
+Saida BFS:
+--Current state: q1     (Tape: a StackTop: e)Size: 0
+--Transition: [q1 e e] --> [q2 $]
+
+        |--Current state: q2    (Tape: a StackTop: $)Size: 1
+        |--Transition: [q2 a e] --> [q2 0]
+        |
+        |       |--Current state: q2    (Tape: b StackTop: 0)Size: 2
+        |       |--Transition: [q2 b 0] --> [q3 e]
+        |       |
+        |       |       |--Current state: q3    (Tape: a StackTop: $)Size: 1
+        |       |       |--Transition: [q3 e $] --> [q4 e]
+        |       |       |
+        |       |       |       |--Current state: q4    (Tape: a StackTop: e)Size: 0
+        |       |       |       |
+Cadeia Recusada!
